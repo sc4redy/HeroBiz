@@ -1,0 +1,41 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build App
+    runs-on: ubuntu-latest
+    steps:
+      - name: Menampilkan Teks
+        run: echo "Ini step build"
+
+  test:
+    name: Test App
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Menampilkan Teks
+        run: echo "Ini step test"
+
+  deployment:
+    name: Deploy App
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Menampilkan Teks
+        run: echo "Ini step deployment"
+      
+      - name: Executing Remote SSH Commands Using SSH Key
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            rm -rf /var/www/html/*
+            rm -rf /var/www/html/.git
+            rm -rf /var/www/html/.github
+            git clone https://github.com/sc4redy/HeroBiz /var/www/html/
