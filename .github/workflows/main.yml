@@ -30,7 +30,7 @@ jobs:
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.HOST }}
-          username: kali
+          username: linuxserver.io
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
