@@ -26,13 +26,12 @@ jobs:
     steps:
       - name: Menampilkan Teks
         run: echo "Ini step deployment"
-      
-      - name: Executing Remote SSH Commands Using SSH Key
+      - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
+          username: kali
+          password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
             echo "Menguji Koneksi SSH"
